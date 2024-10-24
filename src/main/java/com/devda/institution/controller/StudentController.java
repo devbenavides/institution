@@ -55,6 +55,15 @@ public class StudentController {
         }
     }
 
+    @PostMapping("/all")
+    private ResponseEntity<List<StudentEntity>> createAll(@RequestBody List<StudentEntity> listStudent) {
+        try {
+            return new ResponseEntity<>(service.createAll(listStudent), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PutMapping(value = "/{id}")
     private ResponseEntity<StudentEntity> update(@PathVariable("id") Long id, @RequestBody StudentEntity student) {
         Optional<StudentEntity> studentOptional = service.getById(id);
